@@ -202,7 +202,7 @@ const Admin = () => {
                                     ))}
                                 </>
                             )}
-                            {selectedMenu === 'subcategorias' && (
+                            {selectedMenu === 'subCategoria' && (
                                 <>
                                     {subCategoria.map((column) => (
                                         <Form.Item name={column.dataIndex} label={column.title} rules={[{ required: true }]}>
