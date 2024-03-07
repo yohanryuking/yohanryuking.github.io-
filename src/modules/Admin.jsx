@@ -8,6 +8,7 @@ const { Header, Sider, Content } = Layout;
 const Admin = () => {
     const [selectedMenu, setSelectedMenu] = useState('textos');
     const [data, setData] = useState(null);
+    const [session, setSession] = useState(null);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [form] = Form.useForm();
