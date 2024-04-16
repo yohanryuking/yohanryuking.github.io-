@@ -1,0 +1,12 @@
+/* Añade este CSS a tu archivo de estilos */
+
+/* Esto se aplica a cualquier pantalla menor de 600px de ancho */
+@media only screen and (max-width: 600px) {
+    .responsive-table {
+        overflow-x: auto;
+    }
+}
+
+.ant-table-cell {
+    vertical-align: top;
+}

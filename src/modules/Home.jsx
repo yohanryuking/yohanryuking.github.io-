@@ -1,20 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
 import "./homeR.css";
 import imglayf from "../assets/layf.png";
 import Nav from "./Nav";
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
+import { supabase } from "../Client";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [textos, setTextos] = useState([]);
+
+  const fetchTextos = async () => {
+    let { data, error } = await supabase
+      .from('textos')
+      .select('*');
+
+    if (error) {
+      console.log("Error: ", error);
+    } else {
+      setTextos(data[0]);
+      console.log(data[0]);
+    }
+  }
+
+  useEffect(() => {
+    fetchTextos();
+  }, []);
 
   return (
     <div className="container">
       <Nav></Nav>
       <section className="section primero alta">
-        <h1 className="title">Estambre Mágico</h1>
-        <h2 className="subTitle">Hecho a mano</h2>
+        <h1 className="title">{textos.titulo}</h1>
+        <h2 className="subTitle">{textos.subtitulo}</h2>
         <Button type="primary">Botón</Button>
         <div className="wave"></div>
       </section>
@@ -54,35 +73,12 @@ const Home = () => {
 
       <section className="section royos">
         <h2 className="subTitle">
-          ¿Sabes como encargar productos de estambre mágico?
+          {textos.titulo2}
         </h2>
         <ul className="ul">
-          <li className="ul__li text">
-            Debes escribir por WhatsApp donde se toman los pedidos.
-          </li>
-          <li className="ul__li text">
-            Debes saber que existe un plazo de 30 días para su realizacíon.
-          </li>
-          <li className="ul__li text">
-            Es posible que se notifique antes de los 30 ñdias ya que eso depende
-            de los encargos previos.
-          </li>
-          <li className="ul__li text">
-            Si desea algún pedido personalizado con inicial, nombre, color
-            específico u otro detalle se paga por adelantado.
-          </li>
-          <li className="ul__li text">
-            Una vez que se notifique usted tiene 30 días para pagar su encargo,
-            de no ser así pierde el derecho sobre su artículo.
-          </li>
-          <li className="ul__li text">
-            Los pedidos para fechas específicas hay que hacerlos con 15 días de
-            antelación.
-          </li>
-          <li className="ul__li text">
-            Si usted desea un pedido con inmediatez se paga un porcentaje
-            superior a su costo.
-          </li>
+          <p className="ul__li text">
+            {textos.contenido2}
+          </p>
         </ul>
         <br></br>
         <p className="text">
